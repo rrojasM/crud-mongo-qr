@@ -1,6 +1,7 @@
 package com.rrojas.mongocrud.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -61,12 +62,10 @@ public class GenerarQr {
 	}
 
 	public double getTotal() {
-
 		for (int i = 0; i < listProduct.size(); i++) {
 			total += listProduct.get(i).getPrecio();
 		}
-
-		System.out.println("Total selected" + total);
+		System.out.println("TOTAL: " + total);
 		return total;
 	}
 
@@ -80,6 +79,18 @@ public class GenerarQr {
 
 	public void setListProduct(ArrayList<Product> listProduct) {
 		this.listProduct = listProduct;
+	}
+
+	public ArrayList<String> productsList() {
+
+		ArrayList<String> newList = new ArrayList<>();
+
+		for (int i = 0; i < listProduct.size(); i++) {
+			newList.add(listProduct.get(i).getTitle() + "\n"+ listProduct.get(i).getPrecio());
+		}
+
+		return newList;
+
 	}
 
 }

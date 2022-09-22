@@ -2,6 +2,8 @@ package com.rrojas.mongocrud.controller;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +22,16 @@ public class ProductController {
 	
 	
 	@PostMapping("/createProduct")
-	public String saveProduct(@RequestBody Product product) {
+	public Product saveProduct(@RequestBody Product product) {
 		productRepo.save(product);
-		return "Add Successfully";
+		return product;
+	}
+	
+	
+	@PostMapping("/product")
+	ResponseEntity<String> product(@RequestBody Product product){
+		productRepo.save(product);
+		return new ResponseEntity<String>("Create Sussccesfuly", HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/products")
